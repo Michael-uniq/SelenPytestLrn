@@ -1,5 +1,5 @@
 from .base_page import BasePage
-from .locators import ProductPageLocators, BasePageLocators
+from .locators import ProductPageLocators
 
 
 class ProductPage(BasePage):
@@ -27,8 +27,3 @@ class ProductPage(BasePage):
     def should_object_is_disappear(self):
         assert self.is_disappeared(*ProductPageLocators.DISAPPEAR_OBJECT), \
             "Object is presented, but should be disappear"
-
-    def should_be_current_page_is_login(self):
-        current = self.browser.current_url[-7:]
-        login_page = self.browser.find_element(*BasePageLocators.LOGIN_LINK).get_attribute('href')[-7:]
-        assert current == login_page, f'Current page not equal as login page: {current}: {login_page}'
