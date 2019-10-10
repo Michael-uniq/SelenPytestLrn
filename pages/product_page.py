@@ -1,5 +1,6 @@
 from .base_page import BasePage
-from .locators import ProductPageLocators
+from .locators import ProductPageLocators, BasePageLocators
+
 
 class ProductPage(BasePage):
     def should_be_button_add_to_busket(self):
@@ -18,3 +19,16 @@ class ProductPage(BasePage):
         basket_price = self.browser.find_elements(*ProductPageLocators.MESSAGES_AFTER_CLICK_ON_BASKET)[2].text
         price = self.browser.find_element(*ProductPageLocators.PRICE_OF_PRODUCT).text
         assert price in basket_price, f'Basket have another price: {basket_price}, then price of product: {price}'
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"
+
+    def should_object_is_disappear(self):
+        assert self.is_disappeared(*ProductPageLocators.DISAPPEAR_OBJECT), \
+            "Object is presented, but should be disappear"
+
+    def should_be_current_page_is_login(self):
+        current = self.browser.current_url[-7:]
+        login_page = self.browser.find_element(*BasePageLocators.LOGIN_LINK).get_attribute('href')[-7:]
+        assert current == login_page, f'Current page not equal as login page: {current}: {login_page}'
