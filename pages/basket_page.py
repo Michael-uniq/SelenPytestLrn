@@ -4,7 +4,7 @@ from .locators import BasketPageLocators
 
 class BasketPage(BasePage):
     def should_be_nothing_in_basket(self):
-        assert self.is_not_element_present(*BasketPageLocators.GOODS_IN_BASKET_STRING_INVALID), (
+        assert self.is_not_element_present(*BasketPageLocators.GOODS_IN_BASKET_STRING), (
             'Goods have in basket, but must not'
         )
 
